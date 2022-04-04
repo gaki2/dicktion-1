@@ -1,12 +1,15 @@
 import Navbar from "./components/navbar.js";
 import Heading from "./components/heading.js";
+import SearchLog from "./components/searchLog.js";
 import { StateType } from "./types/index.type";
 
 class App {
   $App: HTMLDivElement;
   $Navbar: Navbar;
   $Heading: Heading;
+  $SearchLog: SearchLog;
   state: StateType;
+
   constructor() {
     this.$App = document.createElement("div");
     this.$App.className = "root";
@@ -20,11 +23,13 @@ class App {
     };
     this.$Navbar = new Navbar();
     this.$Heading = new Heading("영어 발음 검색기");
+    this.$SearchLog = new SearchLog(["정적", "로그", "입니다"]);
   }
 
   render($parent: HTMLElement) {
     this.$Navbar.render(this.$App);
     this.$Heading.render(this.$App);
+    this.$SearchLog.render(this.$App);
     $parent.appendChild(this.$App);
   }
 }
