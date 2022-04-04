@@ -1,37 +1,23 @@
-import { StateType } from "./types/index.type";
+import Navbar from "./components/navbar.js";
 
 class App {
   $App: HTMLDivElement;
-
-  $body: HTMLElement;
-
-  state: StateType;
-
-  // state: StateType;
+  $Navbar: Navbar;
 
   constructor() {
     this.$App = document.createElement("div");
-    this.$body = document.body;
     this.$App.className = "root";
-    this.$body.appendChild(this.$App);
-    this.state = {
-      inputValue: "",
-      searchedData: null,
-      openAlert: false,
-      searchLog: [],
-      loading: false,
-      isFocus: false,
-    };
 
-    this.render();
+    this.$Navbar = new Navbar();
   }
 
-  render() {
-    console.log(this.state.inputValue);
+  render($parent: HTMLElement) {
+    this.$Navbar.render(this.$App);
+    $parent.appendChild(this.$App);
   }
 }
 
 window.onload = () => {
-  // eslint-disable-next-line no-new
-  new App();
+  const app = new App();
+  app.render(document.body);
 };
