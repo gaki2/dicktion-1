@@ -6,7 +6,7 @@
   "author": "강수호(sooohka) <shkorea1004@gmail.com>, 유병각(gaki2)<qudrkr0815@korea.ac.kr>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --watch  **/*.ts --exec 'yarn build'",
+    "start": "nodemon",
     "build": "tsc -p ."
   },
   "dependencies": {
