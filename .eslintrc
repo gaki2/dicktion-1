@@ -12,7 +12,27 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "warn",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "import/no-unresolved": "off" ,                                                                                                                                                                                                                
+
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js":"never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ]
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": ["js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+  ,
   "ignorePatterns": "dist/"
 }

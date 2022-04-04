@@ -3,4 +3,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
+  "eslint.validate": ["typescript"],
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.importModuleSpecifierEnding": "js",
 }
