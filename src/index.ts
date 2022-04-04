@@ -7,7 +7,10 @@ class App {
   constructor() {
     this.$App = document.createElement("div");
     this.$App.className = "root";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 69c094d (feat: createEl함수 작성, navbar 렌더로직만 작성)
     this.$Navbar = new Navbar();
   }
 
