@@ -1,0 +1,7 @@
+.div_width_50 {
+    width: 50%;
+  }
+
+.min_height_span {
+    min-height: 4rem; /* span 높이 (h4) 1 rem + margin-top 3 rem = 4.17 rem */
+  }
