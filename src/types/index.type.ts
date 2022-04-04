@@ -12,7 +12,7 @@ export type StateType = {
   inputValue: string;
   searchedData: null | SearchedData;
   openAlert: false;
-  searchLog: [];
+  searchLog: string[];
   loading: false;
   isFocus: false;
 };
