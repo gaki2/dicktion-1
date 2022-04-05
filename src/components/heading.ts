@@ -12,17 +12,14 @@ export default class Heading {
   update(newText: string, $parent: HTMLElement) {
     if (this.text !== newText) {
       this.text = newText;
-      this.delete($parent);
       this.render($parent);
     }
   }
 
-  delete($parent: HTMLElement) {
-    $parent.removeChild(this.$h1);
-  }
-
   render($parent: HTMLElement) {
     this.$h1.innerText = this.text;
-    $parent.appendChild(this.$h1);
+    if (this.$h1.parentNode === null) {
+      $parent.appendChild(this.$h1);
+    }
   }
 }

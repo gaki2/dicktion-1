@@ -56,8 +56,7 @@ export default class SearchForm {
       ev.preventDefault();
       const res = await fetch(`${apiUrl}/${this.$InputField.value}`);
       const data = await res.json();
-      setSearchedData(data);
-      alert(data);
+      setSearchedData(data[0]);
     };
   }
 

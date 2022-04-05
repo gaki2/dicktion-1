@@ -25,20 +25,65 @@ class App {
     };
     this.$Navbar = new Navbar();
     this.$Heading = new Heading("영어 발음 검색기");
-    this.$SearchLog = new SearchLog(["정적", "로그", "입니다"]);
+    this.$SearchLog = new SearchLog(this.state.searchLog);
     this.$SearchForm = new SearchForm(
       this.state.inputValue,
       this.setInputValue.bind(this),
       this.setSearchedData.bind(this)
     );
   }
+
   setSearchedData(data: any) {
-    this.state = { ...this.state, searchedData: data };
-    console.log(this.state);
+    // 데이터 파싱
+    let phonetic = data.phonetic ?? "";
+    if (phonetic) {
+      phonetic = `[${phonetic.slice(1, -1)}]`;
+    }
+    let audio = null;
+    for (let i = 0; i < data.phonetics.length; i += 1) {
+      const temp = data.phonetics[i];
+      if (temp.text && !phonetic) {
+        phonetic = `[${temp.text.slice(1, -1)}]`;
+      }
+      if (temp.audio && !audio) {
+        audio = temp.audio;
+      }
+    }
+    const name = data.word;
+    const partOfSpeech = data.meanings[0].partOfSpeech ?? "";
+    const definition = data.meanings[0].definitions[0].definition ?? "";
+
+    // 스테이트 변경
+    this.state = {
+      ...this.state,
+      searchedData: {
+        name,
+        audio,
+        phonetic,
+        meaning: {
+          partOfSpeech,
+          definition,
+        },
+      },
+    };
+    this.setSearchLog(name);
   }
 
   setInputValue(value: any) {
     this.state = { ...this.state, inputValue: value };
+  }
+
+  setSearchLog(newWord: string) {
+    let newSearchLog = this.state.searchLog.concat(newWord);
+    const dupIndex = this.state.searchLog.indexOf(newWord);
+    if (dupIndex !== -1) {
+      newSearchLog.splice(dupIndex, 1);
+    }
+    if (newSearchLog.length > 10) {
+      newSearchLog = newSearchLog.slice(1);
+    }
+    this.state = { ...this.state, searchLog: newSearchLog };
+    this.$SearchLog.update(this.state.searchLog, this.$App);
   }
 
   render($parent: HTMLElement) {
