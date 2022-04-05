@@ -6,7 +6,7 @@ export type SearchedData = {
     partOfSpeech: string;
     definition: string;
   };
-};
+} | null;
 
 export type StateType = {
   inputValue: string;

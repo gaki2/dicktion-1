@@ -1,6 +1,7 @@
 import Navbar from "./components/navbar.js";
 import Heading from "./components/heading.js";
 import SearchLog from "./components/searchLog.js";
+import DataView from "./components/dataView.js";
 import { StateType } from "./types/index.type";
 import SearchForm from "./components/searchForm.js";
 import DOM from "./utils/index.js";
@@ -11,6 +12,7 @@ class App {
   $Heading: Heading;
   $SearchLog: SearchLog;
   $SearchForm: SearchForm;
+  $DataView: DataView;
   state: StateType;
 
   constructor() {
@@ -31,6 +33,7 @@ class App {
       this.setInputValue.bind(this),
       this.setSearchedData.bind(this)
     );
+    this.$DataView = new DataView();
   }
 
   setSearchedData(data: any) {
@@ -67,6 +70,7 @@ class App {
       },
     };
     this.setSearchLog(name);
+    this.$DataView.update(this.state.searchedData, this.$App);
   }
 
   setInputValue(value: any) {
@@ -91,6 +95,7 @@ class App {
     this.$Heading.render(this.$App);
     this.$SearchLog.render(this.$App);
     this.$SearchForm.render(this.$App);
+    this.$DataView.render(this.$App);
     $parent.appendChild(this.$App);
   }
 }
