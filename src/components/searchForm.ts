@@ -10,17 +10,26 @@ export default class SearchForm {
 
   constructor(
     value: string,
-    setValue: (_value: string) => void,
-    setSearchedData: (data: any) => void
+    setInputValue: (_value: string) => void,
+    setSearchedData: (data: any) => void,
+    setOpenAlert: (bool: boolean) => void
   ) {
-    this.createEl(setSearchedData);
+    this.createEl(setInputValue, setSearchedData, setOpenAlert);
     this.createWrapper();
-    this.createInputField(value, setValue);
+    this.createInputField(value, setInputValue);
   }
 
-  private createEl(setSearchedData: (data: any) => void) {
+  private createEl(
+    setInputValue: (data: any) => void,
+    setSearchedData: (data: any) => void,
+    setOpenAlert: (bool: boolean) => void
+  ) {
     this.$Form = DOM.createEl("form") as HTMLFormElement;
-    this.$Form.onsubmit = this.handleSubmit(setSearchedData).bind(this);
+    this.$Form.onsubmit = this.handleSubmit(
+      setInputValue,
+      setSearchedData,
+      setOpenAlert
+    ).bind(this);
   }
 
   private createWrapper() {
@@ -30,7 +39,7 @@ export default class SearchForm {
     this.$Form.appendChild(this.$Wrapper1);
   }
 
-  private createInputField(value: string, setValue: any) {
+  private createInputField(value: string, setInputValue: any) {
     const input = DOM.createEl(
       "input",
       "form-control form-control-lg"
@@ -40,23 +49,37 @@ export default class SearchForm {
     input.id = "inputLarge";
     input.value = value;
 
-    input.oninput = this.handleInputChange(setValue);
+    input.oninput = this.handleInputChange(setInputValue);
     input.autocomplete = "off";
     this.$InputField = input;
   }
 
-  private handleInputChange(setValue: any) {
+  private handleInputChange(setInputValue: any) {
     return () => {
-      setValue(this.$InputField.value);
+      setInputValue(this.$InputField.value);
     };
   }
 
-  private handleSubmit(setSearchedData: any) {
+  private handleSubmit(
+    setInputValue: any,
+    setSearchedData: any,
+    setOpenAlert: (bool: boolean) => void
+  ) {
     return async (ev: Event) => {
       ev.preventDefault();
-      const res = await fetch(`${apiUrl}/${this.$InputField.value}`);
-      const data = await res.json();
-      setSearchedData(data[0]);
+      try {
+        const res = await fetch(`${apiUrl}/${this.$InputField.value}`);
+        const data = await res.json();
+        setSearchedData(data[0]);
+      } catch (e) {
+        setOpenAlert(true);
+        setTimeout(() => {
+          setOpenAlert(false);
+        }, 3000);
+      } finally {
+        setInputValue("");
+        this.$InputField.value = "";
+      }
     };
   }
 
