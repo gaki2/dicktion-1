@@ -7,3 +7,33 @@
 .min_height_span {
   min-height: 4rem; /* span 높이 (h4) 1 rem + margin-top 3 rem = 4.17 rem */
 }
+
+/* play 버튼 css */
+.play {
+  border-radius: 10px;
+  height: 2.5em;
+  width: 5rem;
+  background: transparent;
+  border: 2px solid #016dd9;
+  outline: none;
+  color: #016dd9;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.play:disabled {
+  background-color: #cccccc;
+  border: 2px solid #999999;
+  color: #666666;
+}
+
+.play:hover:enabled {
+  background: #016dd9;
+  color: #ffffff;
+  animation: squeeze3124 0.9s both;
+}
+
+.play:focus {
+  border: 6px solid #6a8bac;
+  animation: squeeze3124 0.9s both;
+}
