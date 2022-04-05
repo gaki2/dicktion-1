@@ -11,8 +11,8 @@ export type SearchedData = {
 export type StateType = {
   inputValue: string;
   searchedData: null | SearchedData;
-  openAlert: false;
+  openAlert: boolean;
   searchLog: string[];
-  loading: false;
-  isFocus: false;
+  loading: boolean;
+  isFocus: boolean;
 };
