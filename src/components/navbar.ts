@@ -1,9 +1,9 @@
 import DOM from "../utils/index.js";
 
 export default class Navbar {
-  private $El!: HTMLElement;
-  private $Content!: HTMLElement;
-  private $Title!: HTMLAnchorElement;
+  private $El: HTMLElement;
+  private $Content: HTMLElement;
+  private $Title: HTMLAnchorElement;
 
   constructor() {
     this.createEl();
