@@ -4,6 +4,7 @@ import SearchLog from "./components/searchLog.js";
 import { StateType } from "./types/index.type";
 import SearchForm from "./components/searchForm.js";
 import DOM from "./utils/index.js";
+import Alert from "./components/alert.js";
 
 class App {
   $App: HTMLElement;
@@ -11,6 +12,7 @@ class App {
   $Heading: Heading;
   $SearchLog: SearchLog;
   $SearchForm: SearchForm;
+  $Alert: Alert;
   state: StateType;
 
   constructor() {
@@ -26,11 +28,18 @@ class App {
     this.$Navbar = new Navbar();
     this.$Heading = new Heading("영어 발음 검색기");
     this.$SearchLog = new SearchLog(this.state.searchLog);
+    this.$Alert = new Alert(this.state.openAlert);
     this.$SearchForm = new SearchForm(
       this.state.inputValue,
       this.setInputValue.bind(this),
-      this.setSearchedData.bind(this)
+      this.setSearchedData.bind(this),
+      this.setOpenAlert.bind(this)
     );
+  }
+
+  setOpenAlert(bool: boolean) {
+    this.state = { ...this.state, openAlert: bool };
+    this.$Alert.update(bool);
   }
 
   setSearchedData(data: any) {
@@ -91,6 +100,7 @@ class App {
     this.$Heading.render(this.$App);
     this.$SearchLog.render(this.$App);
     this.$SearchForm.render(this.$App);
+    this.$Alert.render(this.$App);
     $parent.appendChild(this.$App);
   }
 }
