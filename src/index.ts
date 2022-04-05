@@ -28,8 +28,13 @@ class App {
     this.$SearchLog = new SearchLog(["정적", "로그", "입니다"]);
     this.$SearchForm = new SearchForm(
       this.state.inputValue,
-      this.setInputValue.bind(this)
+      this.setInputValue.bind(this),
+      this.setSearchedData.bind(this)
     );
+  }
+  setSearchedData(data: any) {
+    this.state = { ...this.state, searchedData: data };
+    console.log(this.state);
   }
 
   setInputValue(value: any) {

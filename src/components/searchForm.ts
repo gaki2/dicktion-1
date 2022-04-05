@@ -1,3 +1,4 @@
+import { apiUrl } from "../utils/api.js";
 import DOM from "../utils/index.js";
 
 export default class SearchForm {
@@ -7,15 +8,19 @@ export default class SearchForm {
   private $InputField: HTMLInputElement;
   private $SubmitButton: HTMLButtonElement;
 
-  constructor(value: string, setValue: (_value: string) => void) {
-    this.createEl();
+  constructor(
+    value: string,
+    setValue: (_value: string) => void,
+    setSearchedData: (data: any) => void
+  ) {
+    this.createEl(setSearchedData);
     this.createWrapper();
     this.createInputField(value, setValue);
   }
 
-  private createEl() {
+  private createEl(setSearchedData: (data: any) => void) {
     this.$Form = DOM.createEl("form") as HTMLFormElement;
-    this.$Form.onsubmit = this.handleSubmit.bind(this);
+    this.$Form.onsubmit = this.handleSubmit(setSearchedData).bind(this);
   }
 
   private createWrapper() {
@@ -42,14 +47,18 @@ export default class SearchForm {
 
   private handleInputChange(setValue: any) {
     return () => {
-      console.log(this.$InputField.value);
       setValue(this.$InputField.value);
     };
   }
 
-  private handleSubmit(ev: Event) {
-    ev.preventDefault();
-    alert(this.$InputField.value);
+  private handleSubmit(setSearchedData: any) {
+    return async (ev: Event) => {
+      ev.preventDefault();
+      const res = await fetch(`${apiUrl}/${this.$InputField.value}`);
+      const data = await res.json();
+      setSearchedData(data);
+      alert(data);
+    };
   }
 
   render($parent: HTMLElement) {
