@@ -4,40 +4,30 @@ import { apiUrl } from "../utils/api.js";
 export default class SearchLog {
   words: string[];
   $wrapper: HTMLElement;
-  setInputValue: (_value: string) => void;
-  setSearchedData: (data: any) => void;
-  setOpenAlert: (bool: boolean) => void;
-  constructor(
-    words: string[],
-    setInputValue: (_value: string) => void,
-    setSearchedData: (data: any) => void,
-    setOpenAlert: (bool: boolean) => void
-  ) {
+  $$buttons: HTMLElement[];
+  constructor(words: string[], setSearchData: any, setOpenAlert: any) {
     this.words = words;
     this.$wrapper = DOM.createEl(
       "div",
       "mt-2 m-auto flex-row pt-3 div_width_50 min_height_span"
     );
-    this.setInputValue = setInputValue;
-    this.setSearchedData = setSearchedData;
-    this.setOpenAlert = setOpenAlert;
-  }
-  onClickSearch(word: string) {
-    return async (ev: Event) => {
-      ev.preventDefault();
-      try {
-        const res = await fetch(`${apiUrl}/${word}`);
-        const data = await res.json();
-        this.setSearchedData(data[0]);
-      } catch (e) {
-        this.setOpenAlert(true);
-        setTimeout(() => {
-          this.setOpenAlert(false);
-        }, 3000);
-      } finally {
-        this.setInputValue("");
+    this.$wrapper.addEventListener("click", (e: any) => {
+      // TODO:axios연동 후 수정
+      if (!e.target) return;
+      if (e.target.classList.contains("btn")) {
+        fetch(`${apiUrl}/${e.target.textContent}`)
+          .then((_res) => _res.json())
+          .then((data) => {
+            setSearchData(data[0]);
+          })
+          .catch(() => {
+            setOpenAlert(true);
+            setTimeout(() => {
+              setOpenAlert(false);
+            }, 3000);
+          });
       }
-    };
+    });
   }
   createButton(word: string) {
     const $h4 = DOM.createEl("h4", "d-inline");
@@ -46,7 +36,6 @@ export default class SearchLog {
       "btn badge rounded-pill bg-light m-1 align-content-center"
     );
     $button.innerText = word;
-    $button.addEventListener("click", this.onClickSearch(word).bind(this));
     $h4.appendChild($button);
     this.$wrapper.appendChild($h4);
   }

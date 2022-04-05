@@ -16,6 +16,7 @@ export default class SearchForm {
   ) {
     this.createEl(setInputValue, setSearchedData, setOpenAlert);
     this.createWrapper();
+    this.createButton();
     this.createInputField(value, setInputValue);
   }
 
@@ -30,6 +31,16 @@ export default class SearchForm {
       setSearchedData,
       setOpenAlert
     ).bind(this);
+  }
+
+  private createButton() {
+    this.$SubmitButton = DOM.createEl(
+      "button",
+      "btn btn-info",
+      "검색"
+    ) as HTMLButtonElement;
+    this.$SubmitButton.type = "submit";
+    this.$SubmitButton.id = "button-addon2";
   }
 
   private createWrapper() {
@@ -67,6 +78,7 @@ export default class SearchForm {
   ) {
     return async (ev: Event) => {
       ev.preventDefault();
+      // axios연동 후 수정
       try {
         const res = await fetch(`${apiUrl}/${this.$InputField.value}`);
         const data = await res.json();
@@ -85,6 +97,7 @@ export default class SearchForm {
 
   render($parent: HTMLElement) {
     this.$Wrapper2.appendChild(this.$InputField);
+    this.$Wrapper2.appendChild(this.$SubmitButton);
     $parent.appendChild(this.$Form);
   }
 }

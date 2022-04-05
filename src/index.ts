@@ -31,7 +31,6 @@ class App {
     this.$Heading = new Heading("영어 발음 검색기");
     this.$SearchLog = new SearchLog(
       this.state.searchLog,
-      this.setInputValue.bind(this),
       this.setSearchedData.bind(this),
       this.setOpenAlert.bind(this)
     );
