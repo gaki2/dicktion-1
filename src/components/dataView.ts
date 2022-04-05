@@ -22,6 +22,10 @@ export default class DataView {
     this.data = null;
   }
 
+  play() {
+    this.$audio.play();
+  }
+
   createView() {
     this.$wrapper = DOM.createEl("div", "m-auto mt-5 div_width_50");
     this.$heading = DOM.createEl("h1", "mb-3 mt-5", this.data && "검색결과");
@@ -74,6 +78,7 @@ export default class DataView {
     this.$playButton.className = "play";
     this.$playButton.disabled = this.data?.audio === null;
     this.$playButton.innerText = "듣기";
+    this.$playButton.addEventListener("click", this.play.bind(this));
     this.$link = document.createElement("a");
     DOM.appendEl(this.$wrapper2, this.$name, this.$phonetic, this.$audio);
     if (this.data) {

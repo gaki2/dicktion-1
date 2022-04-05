@@ -29,7 +29,12 @@ class App {
     };
     this.$Navbar = new Navbar();
     this.$Heading = new Heading("영어 발음 검색기");
-    this.$SearchLog = new SearchLog(this.state.searchLog);
+    this.$SearchLog = new SearchLog(
+      this.state.searchLog,
+      this.setInputValue.bind(this),
+      this.setSearchedData.bind(this),
+      this.setOpenAlert.bind(this)
+    );
     this.$Alert = new Alert(this.state.openAlert);
     this.$SearchForm = new SearchForm(
       this.state.inputValue,
