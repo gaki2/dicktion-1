@@ -1,5 +1,5 @@
-import { apiUrl } from "../utils/api.js";
-import DOM from "../utils/index.js";
+import { apiUrl } from "../utils/api";
+import DOM from "../utils/index";
 
 export default class SearchForm {
   private $Form: HTMLFormElement;

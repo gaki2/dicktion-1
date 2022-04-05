@@ -1,4 +1,4 @@
-import DOM from "../utils/index.js";
+import DOM from "../utils/index";
 
 export default class Heading {
   $h1: HTMLElement;

@@ -1,5 +1,5 @@
-import DOM from "../utils/index.js";
-import { SearchedData } from "../types/index.type.js";
+import DOM from "../utils/index";
+import { SearchedData } from "../types/index.type";
 
 export default class DataView {
   data: SearchedData;

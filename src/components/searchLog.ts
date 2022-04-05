@@ -1,5 +1,5 @@
-import DOM from "../utils/index.js";
-import { apiUrl } from "../utils/api.js";
+import DOM from "../utils/index";
+import { apiUrl } from "../utils/api";
 
 export default class SearchLog {
   words: string[];

@@ -5,5 +5,4 @@
   },
   "eslint.validate": ["typescript"],
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.preferences.importModuleSpecifierEnding": "js",
 }

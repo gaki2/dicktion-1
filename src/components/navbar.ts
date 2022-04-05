@@ -1,4 +1,4 @@
-import DOM from "../utils/index.js";
+import DOM from "../utils";
 
 export default class Navbar {
   private $El: HTMLElement;

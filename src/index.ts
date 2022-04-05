@@ -1,11 +1,12 @@
-import Navbar from "./components/navbar.js";
-import Heading from "./components/heading.js";
-import SearchLog from "./components/searchLog.js";
-import DataView from "./components/dataView.js";
+import Navbar from "./components/navbar";
+import Heading from "./components/heading";
+import SearchLog from "./components/searchLog";
+import DataView from "./components/dataView";
 import { StateType } from "./types/index.type";
-import SearchForm from "./components/searchForm.js";
-import DOM from "./utils/index.js";
-import Alert from "./components/alert.js";
+import SearchForm from "./components/searchForm";
+import DOM from "./utils/index";
+import Alert from "./components/alert";
+import "../styles/index.css";
 
 class App {
   $App: HTMLElement;
