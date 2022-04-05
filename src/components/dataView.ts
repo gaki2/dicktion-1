@@ -21,9 +21,8 @@ export default class DataView {
   constructor() {
     this.data = null;
   }
+
   createView() {
-  $wrapper: HTMLElement;
-  createWrapper() {
     this.$wrapper = DOM.createEl("div", "m-auto mt-5 div_width_50");
     this.$heading = DOM.createEl("h1", "mb-3 mt-5", this.data && "검색결과");
     this.$hr = DOM.createEl("hr");
